@@ -59,7 +59,7 @@ def split_file(filepath, chunk_size):
 
 
 # =====================================================
-# CHIFFREMENT
+# COMPRESSION & CHIFFREMENT (x2)
 # =====================================================
 
 def encrypt():
@@ -214,7 +214,7 @@ def encrypt():
 
 
 # =====================================================
-# DECHIFFREMENT
+# DECOMPRESSION & DECHIFFREMENT (x2)
 # =====================================================
 
 def decrypt():
