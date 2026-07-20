@@ -1,0 +1,93 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# ÉTIENNE LEMAIRE <EMAIL@ADDRESS>, 2026.
+# LAURENT LYAUDET <Laurent.Lyaudet@gmail.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-20 18:55+0200\n"
+"PO-Revision-Date: 2026-07-20 19:05+0200\n"
+"Last-Translator: LAURENT LYAUDET <Laurent.Lyaudet@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: PuzzleCryptGUI_v0.py:81 PuzzleCryptGUI_v0.py:88 PuzzleCryptGUI_v0.py:211
+#: PuzzleCryptGUI_v0.py:237 PuzzleCryptGUI_v0.py:394
+msgid "Error"
+msgstr "Erreur"
+
+#: PuzzleCryptGUI_v0.py:82
+msgid "Select a file."
+msgstr "Sélectionnez un fichier."
+
+#: PuzzleCryptGUI_v0.py:89
+msgid "The two passwords are mandatory."
+msgstr "Les deux mots de passe sont obligatoires."
+
+#: PuzzleCryptGUI_v0.py:204 PuzzleCryptGUI_v0.py:387
+msgid "Success"
+msgstr "Succès"
+
+#: PuzzleCryptGUI_v0.py:205
+#, python-brace-format
+msgid ""
+"File created:\n"
+"\n"
+"{destination}"
+msgstr ""
+"Fichier créé :\n"
+"\n"
+"{destination}"
+
+#: PuzzleCryptGUI_v0.py:238
+msgid "Select a .pzc file."
+msgstr "Sélectionnez un fichier .pzc"
+
+#: PuzzleCryptGUI_v0.py:337
+msgid ""
+"Invalid internal archive.\n"
+"Wrong password 1 or corrupted archive."
+msgstr ""
+"Archive interne invalide.\n"
+"Mot de passe 1 incorrect ou archive corrompue."
+
+#: PuzzleCryptGUI_v0.py:388
+#, python-brace-format
+msgid ""
+"File restored:\n"
+"\n"
+"{destination}"
+msgstr ""
+"Fichier restauré :\n"
+"\n"
+"{destination}"
+
+#: PuzzleCryptGUI_v0.py:421
+msgid "File"
+msgstr "Fichier"
+
+#: PuzzleCryptGUI_v0.py:432
+msgid "Choosing a file"
+msgstr "Choisir un fichier"
+
+#: PuzzleCryptGUI_v0.py:440
+msgid "Password 1 (internal AES)"
+msgstr "Mot de passe 1 (AES interne)"
+
+#: PuzzleCryptGUI_v0.py:451
+msgid "Password 2 (external AES)"
+msgstr "Mot de passe 2 (AES externe)"
+
+#: PuzzleCryptGUI_v0.py:462
+msgid "Encrypt"
+msgstr "Chiffrer"
+
+#: PuzzleCryptGUI_v0.py:469
+msgid "Unencrypt"
+msgstr "Déchiffrer"
