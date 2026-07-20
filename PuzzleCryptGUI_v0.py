@@ -3,6 +3,7 @@ from tkinter import filedialog, messagebox
 
 import os
 import json
+import gettext
 import hashlib
 import random
 import tempfile
@@ -11,8 +12,13 @@ import shutil
 import py7zr
 
 
+gettext.bindtextdomain('puzzle_crypt', './i18n/')
+gettext.textdomain('puzzle_crypt')
+_ = gettext.gettext
+
+
 # =====================================================
-# OUTILS
+# OUTILS / TOOLS
 # =====================================================
 
 def build_permutation(password, n):
@@ -60,6 +66,7 @@ def split_file(filepath, chunk_size):
 
 # =====================================================
 # COMPRESSION & CHIFFREMENT (x2)
+# COMPRESSION & ENCRYPTION (x2)
 # =====================================================
 
 def encrypt():
@@ -71,15 +78,15 @@ def encrypt():
 
     if not filename:
         messagebox.showerror(
-            "Erreur",
-            "Sélectionnez un fichier"
+            _("Error"),
+            _("Select a file."),
         )
         return
 
     if not p1 or not p2:
         messagebox.showerror(
-            "Erreur",
-            "Les deux mots de passe sont obligatoires"
+            _("Error"),
+            _("The two passwords are mandatory.")
         )
         return
 
@@ -94,7 +101,7 @@ def encrypt():
         os.chdir(work)
 
         # ---------------------------------
-        # AES1
+        # AES 1er usage/1st use
         # ---------------------------------
 
         with py7zr.SevenZipFile(
@@ -118,7 +125,7 @@ def encrypt():
         )
 
         # ---------------------------------
-        # Découpage
+        # Découpage/Splitting
         # ---------------------------------
 
         blocks = split_file(
@@ -167,7 +174,7 @@ def encrypt():
             )
 
         # ---------------------------------
-        # AES2
+        # AES 2e usage/2nd use
         # ---------------------------------
 
         with py7zr.SevenZipFile(
@@ -194,14 +201,14 @@ def encrypt():
         )
 
         messagebox.showinfo(
-            "Succès",
-            f"Fichier créé :\n\n{destination}"
+            _("Success"),
+            _("File created:\n\n{destination}").format(destination=destination),
         )
 
     except Exception as e:
 
         messagebox.showerror(
-            "Erreur",
+            _("Error"),
             str(e)
         )
 
@@ -215,6 +222,7 @@ def encrypt():
 
 # =====================================================
 # DECOMPRESSION & DECHIFFREMENT (x2)
+# DECOMPRESSION & UNENCRYPTION (x2)
 # =====================================================
 
 def decrypt():
@@ -226,8 +234,8 @@ def decrypt():
 
     if not filename:
         messagebox.showerror(
-            "Erreur",
-            "Sélectionnez un fichier .pzc"
+            _("Error"),
+            _("Select a .pzc file."),
         )
         return
 
@@ -240,7 +248,8 @@ def decrypt():
         )
 
         # ---------------------------------
-        # Extraction AES2
+        # Extraction AES 2
+        # AES 2 Extraction
         # ---------------------------------
 
         with py7zr.SevenZipFile(
@@ -252,7 +261,8 @@ def decrypt():
             z.extractall(path=work)
 
         # ---------------------------------
-        # Lecture manifeste
+        # Lecture du manifeste
+        # Reading of the manifest
         # ---------------------------------
 
         manifest_path = os.path.join(
@@ -297,7 +307,8 @@ def decrypt():
                 reconstructed[block_index] = pf.read()
 
         # ---------------------------------
-        # Reconstruction inner.7z
+        # Reconstruction d' inner.7z
+        # inner.7z reconstruction
         # ---------------------------------
 
         inner_path = os.path.join(
@@ -316,17 +327,20 @@ def decrypt():
 
         # ---------------------------------
         # Vérification
+        # Verification
         # ---------------------------------
 
         if not py7zr.is_7zfile(inner_path):
 
             raise Exception(
-                "Archive interne invalide.\n"
-                "Mot de passe 1 incorrect ou archive corrompue."
+                _(
+                    "Invalid internal archive.\n"
+                    "Wrong password 1 or corrupted archive."
+                )
             )
 
         # ---------------------------------
-        # AES1
+        # AES 1
         # ---------------------------------
 
         extract_dir = os.path.join(
@@ -349,6 +363,7 @@ def decrypt():
 
         # ---------------------------------
         # Copie du fichier restauré
+        # Copy of the restored file
         # ---------------------------------
 
         restored_file = os.path.join(
@@ -369,14 +384,14 @@ def decrypt():
         )
 
         messagebox.showinfo(
-            "Succès",
-            f"Fichier restauré :\n\n{destination}"
+            _("Succès"),
+            _("File restored:\n\n{destination}").format(destination=destination)
         )
 
     except Exception as e:
 
         messagebox.showerror(
-            "Erreur",
+            _("Error"),
             str(e)
         )
 
@@ -403,7 +418,7 @@ pass2_var = tk.StringVar()
 
 tk.Label(
     root,
-    text="Fichier"
+    text=_("File"),
 ).pack(pady=5)
 
 tk.Entry(
@@ -414,7 +429,7 @@ tk.Entry(
 
 tk.Button(
     root,
-    text="Choisir un fichier",
+    text=_("Choosing a file"),
     command=lambda: file_var.set(
         filedialog.askopenfilename()
     )
@@ -422,7 +437,7 @@ tk.Button(
 
 tk.Label(
     root,
-    text="Mot de passe 1 (AES interne)"
+    text=_("Password 1 (internal AES)"),
 ).pack()
 
 tk.Entry(
@@ -433,7 +448,7 @@ tk.Entry(
 
 tk.Label(
     root,
-    text="Mot de passe 2 (AES externe)"
+    text=_("Password 2 (external AES)"),
 ).pack()
 
 tk.Entry(
@@ -444,14 +459,14 @@ tk.Entry(
 
 tk.Button(
     root,
-    text="Chiffrer",
+    text=_("Encrypt"),
     command=encrypt,
     bg="#90EE90"
 ).pack(fill="x", padx=10, pady=5)
 
 tk.Button(
     root,
-    text="Déchiffrer",
+    text=_("Unencrypt"),
     command=decrypt,
     bg="#ADD8E6"
 ).pack(fill="x", padx=10)
