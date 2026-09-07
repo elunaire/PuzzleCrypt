@@ -173,7 +173,8 @@ def encrypt():
         with py7zr.SevenZipFile(
             "output.pzc",
             "w",
-            password=p2
+            password=p2,
+            header_encryption=True
         ) as z:
 
             z.write("manifest.json")
